@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemiCode.Logging.log4net", "DemiCode.Logging.log4net\DemiCode.Logging.log4net.csproj", "{D494AB74-6095-4B39-AD47-3E12678AE83C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemiCode.Logging.log4net.Test", "DemiCode.Logging.log4net.Test\DemiCode.Logging.log4net.Test.csproj", "{41A8CB99-344F-47DD-A9F6-DAA094DD330D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e4subsea.Logging", "e4subsea.Logging\e4subsea.Logging.csproj", "{0AC8B11C-17ED-4289-A5E1-22BBCADBAF8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e4subsea.Logging.Test", "e4subsea.Logging.Test\e4subsea.Logging.Test.csproj", "{0826ACE1-2A76-44E8-A8B6-19A4C95C6AED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D63601A6-C64F-42C2-BB74-31C5A623C0ED}"
+	ProjectSection(SolutionItems) = preProject
+		build.msbuild = build.msbuild
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D494AB74-6095-4B39-AD47-3E12678AE83C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D494AB74-6095-4B39-AD47-3E12678AE83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D494AB74-6095-4B39-AD47-3E12678AE83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D494AB74-6095-4B39-AD47-3E12678AE83C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A8CB99-344F-47DD-A9F6-DAA094DD330D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A8CB99-344F-47DD-A9F6-DAA094DD330D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A8CB99-344F-47DD-A9F6-DAA094DD330D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A8CB99-344F-47DD-A9F6-DAA094DD330D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC8B11C-17ED-4289-A5E1-22BBCADBAF8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC8B11C-17ED-4289-A5E1-22BBCADBAF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC8B11C-17ED-4289-A5E1-22BBCADBAF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC8B11C-17ED-4289-A5E1-22BBCADBAF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0826ACE1-2A76-44E8-A8B6-19A4C95C6AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0826ACE1-2A76-44E8-A8B6-19A4C95C6AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0826ACE1-2A76-44E8-A8B6-19A4C95C6AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0826ACE1-2A76-44E8-A8B6-19A4C95C6AED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

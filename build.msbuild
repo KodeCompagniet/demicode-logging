@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build;Test" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!--
+  General build file based on the solution file pointed to by the $(Solution) property
+  and the list of test assemblies in @(TestAssembly) group.
+  First, the solution is built and then unit tests are executed. 
+  
+  Test results are placed in the folder pointed to by the $(Collateral) property.
+  
+  Use the PublishRelease target to build a release and publish as nuget package.
+  -->
+
+
+  <PropertyGroup>
+    <SolutionDir>$(MSBuildProjectDirectory)</SolutionDir>
+    <Solution>$(SolutionDir)\DemiCode.Logging.sln</Solution>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Any CPU</Platform>
+
+    <NugetSecret Condition=" '$(NugetSecret)' == '' ">nuget.org secret</NugetSecret>
+
+    <ExtensionTasksPath Condition=" '$(ExtensionTasksPath)' == '' ">$(SolutionDir)\.msbuild\</ExtensionTasksPath>
+    <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(SolutionDir)\.nuget\nuget.exe</NuGetExePath>
+
+  </PropertyGroup>
+
+  <!-- List all dlls to run unit tests from -->
+  <ItemGroup>
+    <TestAssembly Condition=" '$(Platform)' == 'x86' " Include="$(SolutionDir)\DemiCode.Logging.log4net.Test\bin\x86\debug\DemiCode.Logging.log4net.Test.dll" />
+    <TestAssembly Condition=" '$(Platform)' == 'Any CPU' " Include="$(SolutionDir)\DemiCode.Logging.log4net.Test\bin\debug\DemiCode.Logging.log4net.Test.dll" />
+  </ItemGroup>
+
+  <UsingTask AssemblyFile="$(ExtensionTasksPath)MSBuild.ExtensionPack.dll" TaskName="MSBuild.ExtensionPack.CodeQuality.NUnit"/>
+  <UsingTask AssemblyFile="$(ExtensionTasksPath)MSBuild.ExtensionPack.dll" TaskName="MSBuild.ExtensionPack.Framework.Assembly"/>
+
+  <PropertyGroup>
+    <Collateral>$(SolutionDir)\Artifacts</Collateral>
+    <TestResultsDir>$(Collateral)</TestResultsDir>
+    <NugetDllDir>$(SolutionDir)\lib\net40</NugetDllDir>
+    <TheNuspecFile>$(SolutionDir)\DemiCode.Logging.nuspec</TheNuspecFile>
+    <TheMainDll>$(SolutionDir)\DemiCode.Logging.log4net\bin\Release\DemiCode.Logging.log4net.dll</TheMainDll>
+    <Test32Bit>$(Platform.Equals('x86'))</Test32Bit>
+  </PropertyGroup>
+
+  <Target Name="Setup">
+    <MakeDir Directories="$(TestResultsDir)" />
+  </Target>
+
+  <Target Name="Build" DependsOnTargets="Setup">
+    <MSBuild Projects="$(Solution)" Targets="Build" Properties="Configuration=$(Configuration);Platform=$(Platform)" BuildInParallel="true" />
+  </Target>
+
+  <Target Name="Test" DependsOnTargets="Build">
+    <MSBuild.ExtensionPack.CodeQuality.NUnit Assemblies="@(TestAssembly)"
+                                             Use32Bit="$(Test32Bit)"
+                                             NoShadow="true"
+                                             OutputXmlFile="$(TestResultsDir)\testresults.xml"
+                                             ExcludeCategory="Integration"
+                                             ToolPath="C:\Program Files (x86)\NUnit 2.5.10\bin\net-2.0" />
+  </Target>
+
+  <Target Name="BuildRelease" DependsOnTargets="Setup">
+    <MSBuild Projects="$(Solution)" Targets="Build" Properties="Configuration=Release;Platform=$(Platform)" />
+  </Target>
+
+  <Target Name="PublishRelease" DependsOnTargets="BuildRelease">
+
+    <MSBuild.ExtensionPack.Framework.Assembly TaskAction="GetInfo" NetAssembly="$(TheMainDll)">
+      <Output TaskParameter="OutputItems" ItemName="Info"/>
+    </MSBuild.ExtensionPack.Framework.Assembly>
+
+    <PropertyGroup>
+      <BuildCommand>"$(NuGetExePath)" pack "$(TheNuspecFile)" -p Configuration=$(Release) -symbols -Version "%(Info.AssemblyVersion)"</BuildCommand>
+      <ThePackage>$(SolutionDir)\DemiCode.Logging.%(Info.AssemblyVersion).nupkg</ThePackage>
+      <PushCommand>"$(NuGetExePath)" push "$(ThePackage)" $(NugetSecret)</PushCommand>
+    </PropertyGroup>
+
+    <Exec Command="$(BuildCommand)" LogStandardErrorAsError="true" />
+    <Exec Command="$(PushCommand)" LogStandardErrorAsError="true" />
+
+  </Target>
+
+
+</Project>

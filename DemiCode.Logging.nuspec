@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <version>$version$</version>
+    <authors>Peter Lillevold</authors>
+    <owners>KodeCompagniet AS</owners>
+    <dependencies>
+      <dependency id="log4net" version="2.0.0" />
+    </dependencies>
+    <id>DemiCode.Logging</id>
+    <title>DemiCode.Logging</title>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Additional appenders, filters and type converters for use with log4net. NOTE: this is an initial release to the public meant for users already familiar with the DemiCode.Logging API. Online documentation is not yet available.</description>
+    <copyright>KodeCompagniet AS</copyright>
+    <language>en-US</language>
+    <tags>logging log4net net40</tags>
+  </metadata>
+  <files>
+    <file src="DemiCode.Logging.log4net\bin\release\DemiCode.Logging.log4net.dll" target="lib\net40\DemiCode.Logging.log4net.dll" />
+    <file src="DemiCode.Logging.log4net\bin\release\DemiCode.Logging.log4net.pdb" target="lib\net40\DemiCode.Logging.log4net.pdb" />
+    <file src="DemiCode.Logging.log4net\bin\release\DemiCode.Logging.log4net.xml" target="lib\net40\DemiCode.Logging.log4net.xml" />
+    <file src="DemiCode.Logging.log4net\**\*.cs" target="src" />
+  </files>
+</package>
